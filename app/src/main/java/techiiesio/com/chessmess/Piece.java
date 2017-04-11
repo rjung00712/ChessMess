@@ -40,21 +40,46 @@ public class Piece
     //Returns false if the move does not cause your king to be in check
     public boolean causesCheck(int x, int y, Board b)
     {
-        //Make a copy of the board
-        Piece[][] board = b.getBoard();
+        //Make a copy of the x- y- coords
+        int tempX = xCoord;
+        int tempY = yCoord;
         //Get the white King
         King whiteKing = b.getKing('W');
         //Get the black King
         King blackKing = b.getKing('B');
-        //board[y][x] = board[yCoord][xCoord];
-        //board[yCoord][xCoord] = null;
+        b.getBoard()[y][x] = b.getBoard()[yCoord][xCoord];
+        b.getBoard()[yCoord][xCoord] = null;
+        xCoord = x;
+        yCoord = y;
         if(this.Color == 'W')
+        {
             if(!whiteKing.checkForCheck(whiteKing.xCoord, whiteKing.yCoord, b))
+            {
+                //Reset everything so that a move isn't actually made
+                b.getBoard()[tempY][tempX] = b.getBoard()[y][x];
+                b.getBoard()[y][x] = null;
+                xCoord = tempX;
+                yCoord = tempY;
                 return true;
-            else
+            }
+        }
+        else
+        {
             if(!blackKing.checkForCheck(blackKing.xCoord, blackKing.yCoord, b))
+            {
+                //Reset everything so that a move isn't actually made
+                b.getBoard()[tempY][tempX] = b.getBoard()[y][x];
+                b.getBoard()[y][x] = null;
+                xCoord = tempX;
+                yCoord = tempY;
                 return true;
-
+            }
+        }
+        //Reset everything so that a move isn't actually made
+        b.getBoard()[tempY][tempX] = b.getBoard()[y][x];
+        b.getBoard()[y][x] = null;
+        xCoord = tempX;
+        yCoord = tempY;
         return false;
     }
 }

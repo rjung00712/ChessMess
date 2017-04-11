@@ -166,7 +166,7 @@ public class Knight extends Piece
             for(int j = 0; j < 8; j++)
             {
                 if(valid[j][i])
-                    valid[j][i] = causesCheck(i, j, b);
+                    valid[j][i] = !causesCheck(i, j, b);
                 if(valid[j][i])
                     return true;
             }

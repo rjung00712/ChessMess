@@ -259,48 +259,73 @@ public class Board
         if(check)
         {
             for(int i = 0; i < 8; i++)
-                for(int j = 0; j < 8; j++)
+            {
+                if(checkmate)
                 {
-                    if(board[i][j] != null && board[i][j].getColor() != piece.getColor())
+                    for(int j = 0; j < 8; j++)
                     {
-                        if(board[i][j] instanceof Pawn)
+                        if(board[i][j] != null && board[i][j].getColor() != piece.getColor())
                         {
-                            Pawn pawn = (Pawn) board[i][j];
-                            if(pawn.hasValid(this))
-                                checkmate = false;
-                        }
-                        if(board[i][j] instanceof Rook)
-                        {
-                            Rook rook = (Rook) board[i][j];
-                            if(rook.hasValid(this))
-                                checkmate = false;
-                        }
-                        if(board[i][j] instanceof Knight)
-                        {
-                            Knight knight = (Knight) board[i][j];
-                            if(knight.hasValid(this))
-                                checkmate = false;
-                        }
-                        if(board[i][j] instanceof Bishop)
-                        {
-                            Bishop bishop = (Bishop) board[i][j];
-                            if(bishop.hasValid(this))
-                                checkmate = false;
-                        }
-                        if(board[i][j] instanceof Queen)
-                        {
-                            Queen queen = (Queen) board[i][j];
-                            if(queen.hasValid(this))
-                                checkmate = false;
-                        }
-                        if(board[i][j] instanceof King)
-                        {
-                            King king = (King) board[i][j];
-                            if(king.hasValid(this))
-                                checkmate = false;
+                            if(board[i][j] instanceof Pawn)
+                            {
+                                Pawn pawn = (Pawn) board[i][j];
+                                if(pawn.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                            if(board[i][j] instanceof Rook)
+                            {
+                                Rook rook = (Rook) board[i][j];
+                                if(rook.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                            if(board[i][j] instanceof Knight)
+                            {
+                                Knight knight = (Knight) board[i][j];
+                                if(knight.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                            if(board[i][j] instanceof Bishop)
+                            {
+                                Bishop bishop = (Bishop) board[i][j];
+                                if(bishop.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                            if(board[i][j] instanceof Queen)
+                            {
+                                Queen queen = (Queen) board[i][j];
+                                if(queen.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                            if(board[i][j] instanceof King)
+                            {
+                                King king = (King) board[i][j];
+                                if(king.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
+                else
+                    break;
+            }
             if(checkmate)
                 System.out.println("Checkmate");
             else
@@ -309,6 +334,8 @@ public class Board
     }
 
     public Piece[][] getBoard() {return board;}
+
+    public void setBoard(Piece[][] b) {board = b;}
 
     public King getKing(char c)
     {
