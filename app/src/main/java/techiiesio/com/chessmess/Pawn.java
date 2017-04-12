@@ -6,6 +6,8 @@ package techiiesio.com.chessmess;
 
 public class Pawn extends Piece
 {
+    private int enPassant;
+
     public Pawn(char c, int x, int y)
     {
         super(c, x, y);
@@ -38,6 +40,22 @@ public class Pawn extends Piece
             if(xCoord + 1 <= 7 && board[yCoord - 1][xCoord + 1] != null
                     && board[yCoord - 1][xCoord + 1].getColor() != this.Color)
                 valid[yCoord - 1][xCoord + 1] = true;
+            if(xCoord - 1 >= 0 && board[yCoord][xCoord - 1] != null
+                    && board[yCoord][xCoord - 1] instanceof Pawn
+                    && board[yCoord][xCoord - 1].getColor() != this.Color)
+            {
+                Pawn p = (Pawn) board[yCoord][xCoord - 1];
+                if(p.getEnPassant() > 0)
+                    valid[yCoord - 1][xCoord - 1] = true;
+            }
+            if(xCoord + 1 <= 7 && board[yCoord][xCoord + 1] != null
+                    && board[yCoord][xCoord + 1] instanceof Pawn
+                    && board[yCoord][xCoord + 1].getColor() != this.Color)
+            {
+                Pawn p = (Pawn) board[yCoord][xCoord + 1];
+                if(p.getEnPassant() > 0)
+                    valid[yCoord - 1][xCoord + 1] = true;
+            }
         }
         else
         {
@@ -57,6 +75,22 @@ public class Pawn extends Piece
             if(xCoord + 1 <= 7 && board[yCoord + 1][xCoord + 1] != null
                     && board[yCoord + 1][xCoord + 1].getColor() != this.Color)
                 valid[yCoord + 1][xCoord + 1] = true;
+            if(xCoord - 1 >= 0 && board[yCoord][xCoord - 1] != null
+                    && board[yCoord][xCoord - 1] instanceof Pawn
+                    && board[yCoord][xCoord - 1].getColor() != this.Color)
+            {
+                Pawn p = (Pawn) board[yCoord][xCoord - 1];
+                if(p.getEnPassant() > 0)
+                    valid[yCoord + 1][xCoord - 1] = true;
+            }
+            if(xCoord + 1 <= 7 && board[yCoord][xCoord + 1] != null
+                    && board[yCoord][xCoord + 1] instanceof Pawn
+                    && board[yCoord][xCoord + 1].getColor() != this.Color)
+            {
+                Pawn p = (Pawn) board[yCoord][xCoord + 1];
+                if(p.getEnPassant() > 0)
+                    valid[yCoord + 1][xCoord + 1] = true;
+            }
         }
 
         if(valid[y][x] && !attacking)
@@ -93,6 +127,22 @@ public class Pawn extends Piece
             if(xCoord + 1 <= 7 && board[yCoord - 1][xCoord + 1] != null
                     && board[yCoord - 1][xCoord + 1].getColor() != this.Color)
                 valid[yCoord - 1][xCoord + 1] = true;
+            if(xCoord - 1 >= 0 && board[yCoord][xCoord - 1] != null
+                    && board[yCoord][xCoord - 1] instanceof Pawn
+                    && board[yCoord][xCoord - 1].getColor() != this.Color)
+            {
+                Pawn p = (Pawn) board[yCoord][xCoord - 1];
+                if(p.getEnPassant() > 0)
+                    valid[yCoord - 1][xCoord - 1] = true;
+            }
+            if(xCoord + 1 <= 7 && board[yCoord][xCoord + 1] != null
+                    && board[yCoord][xCoord + 1] instanceof Pawn
+                    && board[yCoord][xCoord + 1].getColor() != this.Color)
+            {
+                Pawn p = (Pawn) board[yCoord][xCoord + 1];
+                if(p.getEnPassant() > 0)
+                    valid[yCoord - 1][xCoord + 1] = true;
+            }
         }
         else
         {
@@ -112,6 +162,22 @@ public class Pawn extends Piece
             if(xCoord + 1 <= 7 && board[yCoord + 1][xCoord + 1] != null
                     && board[yCoord + 1][xCoord + 1].getColor() != this.Color)
                 valid[yCoord + 1][xCoord + 1] = true;
+            if(xCoord - 1 >= 0 && board[yCoord][xCoord - 1] != null
+                    && board[yCoord][xCoord - 1] instanceof Pawn
+                    && board[yCoord][xCoord - 1].getColor() != this.Color)
+            {
+                Pawn p = (Pawn) board[yCoord][xCoord - 1];
+                if(p.getEnPassant() > 0)
+                    valid[yCoord + 1][xCoord - 1] = true;
+            }
+            if(xCoord + 1 <= 7 && board[yCoord][xCoord + 1] != null
+                    && board[yCoord][xCoord + 1] instanceof Pawn
+                    && board[yCoord][xCoord + 1].getColor() != this.Color)
+            {
+                Pawn p = (Pawn) board[yCoord][xCoord + 1];
+                if(p.getEnPassant() > 0)
+                    valid[yCoord + 1][xCoord + 1] = true;
+            }
         }
 
         for(int i = 0; i < 8; i++)
@@ -124,4 +190,8 @@ public class Pawn extends Piece
             }
         return false;
     }
+
+    public int getEnPassant() {return enPassant;}
+
+    public void setEnPassant(int e) {enPassant = e;}
 }

@@ -51,91 +51,97 @@ public class Board
             {
                 p.setCoords(endX, endY);
                 p.setMoved(true);
+                if(endY == startY + 2 || endY == startY - 2)
+                    p.setEnPassant(2);
                 board[endY][endX] = p;
                 board[startY][startX] = null;
                 if(p.getColor() == 'W')
                 {
-                    if(p.yCoord == 0)
+                    if(board[endY + 1][endX] != null && board[endY + 1][endX].getColor() != p.getColor())
+                        board[endY + 1][endX] = null;
+                    if(endY == 0)
                     {
-                        int choice = 0;
+                        int choice = 0;		//This will be changed, it was used for testing
                         switch(choice)
                         {
                             case 0:
-                                Queen q = new Queen('W', p.xCoord, p.yCoord);
+                                Queen q = new Queen('W', p.getX(), p.getY());
                                 q.setMoved(true);
-                                board[p.yCoord][p.xCoord] = q;
-                                if(q.isValid(blackKing.xCoord, blackKing.yCoord, this, true))
+                                board[endY][endX] = q;
+                                if(q.isValid(blackKing.getX(), blackKing.getY(), this, true))
                                     check = true;
                                 break;
                             case 1:
-                                Knight kn = new Knight('W', p.xCoord, p.yCoord);
+                                Knight kn = new Knight('W', p.getX(), p.getY());
                                 kn.setMoved(true);
-                                board[p.yCoord][p.xCoord] = kn;
-                                if(kn.isValid(blackKing.xCoord, blackKing.yCoord, this, true))
+                                board[endY][endX] = kn;
+                                if(kn.isValid(blackKing.getX(), blackKing.getY(), this, true))
                                     check = true;
                                 break;
                             case 2:
-                                Bishop b = new Bishop('W', p.xCoord, p.yCoord);
+                                Bishop b = new Bishop('W', p.getX(), p.getY());
                                 b.setMoved(true);
-                                board[p.yCoord][p.xCoord] = b;
-                                if(b.isValid(blackKing.xCoord, blackKing.yCoord, this, true))
+                                board[endY][endX] = b;
+                                if(b.isValid(blackKing.getX(), blackKing.getY(), this, true))
                                     check = true;
                                 break;
                             case 3:
-                                Rook r = new Rook('W', p.xCoord, p.yCoord);
+                                Rook r = new Rook('W', p.getX(), p.getY());
                                 r.setMoved(true);
-                                board[p.yCoord][p.xCoord] = r;
-                                if(r.isValid(blackKing.xCoord, blackKing.yCoord, this, true))
+                                board[endY][endX] = r;
+                                if(r.isValid(blackKing.getX(), blackKing.getY(), this, true))
                                     check = true;
                                 break;
                         }
                     }
                     else
                     {
-                        if(p.isValid(blackKing.xCoord, blackKing.yCoord, this, true))
+                        if(p.isValid(blackKing.getX(), blackKing.getY(), this, true))
                             check = true;
                     }
                 }
                 else
                 {
-                    if(p.yCoord == 7)
+                    if(board[endY - 1][endX] != null && board[endY - 1][endX].getColor() != p.getColor())
+                        board[endY - 1][endX] = null;
+                    if(p.getY() == 7)
                     {
                         int choice = 0;
                         switch(choice)
                         {
                             case 0:
-                                Queen q = new Queen('B', p.xCoord, p.yCoord);
+                                Queen q = new Queen('B', p.getX(), p.getY());
                                 q.setMoved(true);
-                                board[p.yCoord][p.xCoord] = q;
-                                if(q.isValid(whiteKing.xCoord, whiteKing.yCoord, this, true))
+                                board[endY][endX] = q;
+                                if(q.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
                                     check = true;
                                 break;
                             case 1:
-                                Knight kn = new Knight('B', p.xCoord, p.yCoord);
+                                Knight kn = new Knight('B', p.getX(), p.getY());
                                 kn.setMoved(true);
-                                board[p.yCoord][p.xCoord] = kn;
-                                if(kn.isValid(whiteKing.xCoord, whiteKing.yCoord, this, true))
+                                board[endY][endX] = kn;
+                                if(kn.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
                                     check = true;
                                 break;
                             case 2:
-                                Bishop b = new Bishop('B', p.xCoord, p.yCoord);
+                                Bishop b = new Bishop('B', p.getX(), p.getY());
                                 b.setMoved(true);
-                                board[p.yCoord][p.xCoord] = b;
-                                if(b.isValid(whiteKing.xCoord, whiteKing.yCoord, this, true))
+                                board[endY][endX] = b;
+                                if(b.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
                                     check = true;
                                 break;
                             case 3:
-                                Rook r = new Rook('B', p.xCoord, p.yCoord);
+                                Rook r = new Rook('B', p.getX(), p.getY());
                                 r.setMoved(true);
-                                board[p.yCoord][p.xCoord] = r;
-                                if(r.isValid(whiteKing.xCoord, whiteKing.yCoord, this, true))
+                                board[endY][endX] = r;
+                                if(r.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
                                     check = true;
                                 break;
                         }
                     }
                     else
                     {
-                        if(p.isValid(whiteKing.xCoord, whiteKing.yCoord, this, true))
+                        if(p.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
                             check = true;
                     }
                 }
@@ -152,12 +158,12 @@ public class Board
                 board[startY][startX] = null;
                 if(r.getColor() == 'W')
                 {
-                    if(r.isValid(blackKing.xCoord, blackKing.yCoord, this, true))
+                    if(r.isValid(blackKing.getX(), blackKing.getY(), this, true))
                         check = true;
                 }
                 else
                 {
-                    if(r.isValid(whiteKing.xCoord, whiteKing.yCoord, this, true))
+                    if(r.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
                         check = true;
                 }
             }
@@ -173,12 +179,12 @@ public class Board
                 board[startY][startX] = null;
                 if(kn.getColor() == 'W')
                 {
-                    if(kn.isValid(blackKing.xCoord, blackKing.yCoord, this, true))
+                    if(kn.isValid(blackKing.getX(), blackKing.getY(), this, true))
                         check = true;
                 }
                 else
                 {
-                    if(kn.isValid(whiteKing.xCoord, whiteKing.yCoord, this, true))
+                    if(kn.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
                         check = true;
                 }
             }
@@ -194,12 +200,12 @@ public class Board
                 board[startY][startX] = null;
                 if(b.getColor() == 'W')
                 {
-                    if(b.isValid(blackKing.xCoord, blackKing.yCoord, this, true))
+                    if(b.isValid(blackKing.getX(), blackKing.getY(), this, true))
                         check = true;
                 }
                 else
                 {
-                    if(b.isValid(whiteKing.xCoord, whiteKing.yCoord, this, true))
+                    if(b.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
                         check = true;
                 }
             }
@@ -215,12 +221,12 @@ public class Board
                 board[startY][startX] = null;
                 if(q.getColor() == 'W')
                 {
-                    if(q.isValid(blackKing.xCoord, blackKing.yCoord, this, true))
+                    if(q.isValid(blackKing.getX(), blackKing.getY(), this, true))
                         check = true;
                 }
                 else
                 {
-                    if(q.isValid(whiteKing.xCoord, whiteKing.yCoord, this, true))
+                    if(q.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
                         check = true;
                 }
             }
@@ -256,6 +262,17 @@ public class Board
                 board[startY][startX] = null;
             }
         }
+        for(int i = 3; i <= 4; i++)
+            for(int j = 0; j < 8; j++)
+            {
+                if(board[i][j] != null && board[i][j] instanceof Pawn)
+                {
+                    Pawn p = (Pawn) board[i][j];
+                    if(p.getEnPassant() > 0)
+                        p.setEnPassant(p.getEnPassant() - 1);
+                    board[i][j] = p;
+                }
+            }
         if(check)
         {
             for(int i = 0; i < 8; i++)

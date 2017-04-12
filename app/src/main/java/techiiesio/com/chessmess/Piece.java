@@ -47,6 +47,7 @@ public class Piece
         King whiteKing = b.getKing('W');
         //Get the black King
         King blackKing = b.getKing('B');
+        Piece temp = b.getBoard()[y][x];
         b.getBoard()[y][x] = b.getBoard()[yCoord][xCoord];
         b.getBoard()[yCoord][xCoord] = null;
         xCoord = x;
@@ -57,7 +58,7 @@ public class Piece
             {
                 //Reset everything so that a move isn't actually made
                 b.getBoard()[tempY][tempX] = b.getBoard()[y][x];
-                b.getBoard()[y][x] = null;
+                b.getBoard()[y][x] = temp;
                 xCoord = tempX;
                 yCoord = tempY;
                 return true;
@@ -69,7 +70,7 @@ public class Piece
             {
                 //Reset everything so that a move isn't actually made
                 b.getBoard()[tempY][tempX] = b.getBoard()[y][x];
-                b.getBoard()[y][x] = null;
+                b.getBoard()[y][x] = temp;
                 xCoord = tempX;
                 yCoord = tempY;
                 return true;
@@ -77,7 +78,7 @@ public class Piece
         }
         //Reset everything so that a move isn't actually made
         b.getBoard()[tempY][tempX] = b.getBoard()[y][x];
-        b.getBoard()[y][x] = null;
+        b.getBoard()[y][x] = temp;
         xCoord = tempX;
         yCoord = tempY;
         return false;
