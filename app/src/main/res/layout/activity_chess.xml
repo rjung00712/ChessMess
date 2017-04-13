@@ -14,11 +14,6 @@
         android:id="@+id/gridView"
         android:numColumns="8"
 
-
-        android:layout_weight="1"
-        android:horizontalSpacing="0dip"
-        android:verticalSpacing="0dip"
-
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
