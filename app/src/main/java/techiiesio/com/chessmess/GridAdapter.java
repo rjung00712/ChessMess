@@ -61,7 +61,8 @@ public class GridAdapter extends BaseAdapter {
         ImageView squareImage = new ImageView(context);
         squareImage.setLayoutParams(new GridView.LayoutParams(squareWidth, squareWidth));
         squareImage.setBackgroundResource(images[position]);
-        squareImage.setImageResource(pieces[position]);
+        if(pieces[position] != -1)
+            squareImage.setImageResource(pieces[position]);
 
 
 
