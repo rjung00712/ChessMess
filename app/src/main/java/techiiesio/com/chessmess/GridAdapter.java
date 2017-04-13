@@ -18,12 +18,14 @@ public class GridAdapter extends BaseAdapter {
     Context context;
     String[] values;
     int[] images;
+    int[] pieces;
     View view;
     LayoutInflater layoutInflater;
 
-    public GridAdapter(Context context, int[] images) {
+    public GridAdapter(Context context, int[] images, int[] pieces) {
         this.context = context;
         this.images = images;
+        this.pieces = pieces;
     }
 
     @Override
@@ -57,8 +59,9 @@ public class GridAdapter extends BaseAdapter {
         ImageView pieceImage = new ImageView(context);
 
         ImageView squareImage = new ImageView(context);
-        squareImage.setLayoutParams(new GridView.LayoutParams(squareHeight, squareWidth));
-        squareImage.setImageResource(images[position]);
+        squareImage.setLayoutParams(new GridView.LayoutParams(squareWidth, squareWidth));
+        squareImage.setBackgroundResource(images[position]);
+        squareImage.setImageResource(pieces[position]);
 
 
 
