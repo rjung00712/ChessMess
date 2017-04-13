@@ -2,6 +2,7 @@ package techiiesio.com.chessmess;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.GridView;
 
 public class ChessActivity extends AppCompatActivity {
@@ -45,6 +46,7 @@ public class ChessActivity extends AppCompatActivity {
     };
 
     GridView gridView;  // gridview object that references the grid view container
+    private Board board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,5 +70,69 @@ public class ChessActivity extends AppCompatActivity {
 
     protected void initializeBoard() {
 
+    }
+
+    public void setPieces(Piece[][] p)
+    {
+        for(int i = 0; i < 8; i++)
+            for(int j = 0; j < 8; j++)
+            {
+                if(p[i][j] != null)
+                {
+                    if(p[i][j] instanceof Pawn)
+                    {
+                        if(p[i][j].getColor() == 'W')
+                            pieces[(8 * i) + j] = R.drawable.white_pawn;
+                        else
+                            pieces[(8 * i) + j] = R.drawable.black_pawn;
+                    }
+                    else if(p[i][j] instanceof Rook)
+                    {
+                        if(p[i][j].getColor() == 'W')
+                            pieces[(8 * i) + j] = R.drawable.white_rook;
+                        else
+                            pieces[(8 * i) + j] = R.drawable.black_rook;
+                    }
+                    else if(p[i][j] instanceof Knight)
+                    {
+                        if (p[i][j].getColor() == 'W')
+                            pieces[(8 * i) + j] = R.drawable.white_knight;
+                        else
+                            pieces[(8 * i) + j] = R.drawable.black_knight;
+                    }
+                    else if(p[i][j] instanceof Bishop)
+                    {
+                        if(p[i][j].getColor() == 'W')
+                            pieces[(8 * i) + j] = R.drawable.white_bishop;
+                        else
+                            pieces[(8 * i) + j] = R.drawable.black_bishop;
+                    }
+                    else if(p[i][j] instanceof Queen)
+                    {
+                        if(p[i][j].getColor() == 'W')
+                            pieces[(8 * i) + j] = R.drawable.white_queen;
+                        else
+                            pieces[(8 * i) + j] = R.drawable.black_queen;
+                    }
+                    else
+                    {
+                        if(p[i][j].getColor() == 'W')
+                            pieces[(8 * i) + j] = R.drawable.white_king;
+                        else
+                            pieces[(8 * i) + j] = R.drawable.black_king;
+                    }
+                }
+                else
+                    pieces[(8 * i) + j] = -1;
+            }
+    }
+
+    public void flipBoard(View v)
+    {
+        int[] temp = new int[pieces.length];
+        int x = pieces.length - 1;
+        for(int i = 0; i < pieces.length; i++, x--)
+            temp[x] = pieces[i];
+        pieces = temp;
     }
 }

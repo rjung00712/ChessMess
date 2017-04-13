@@ -10,7 +10,6 @@ public class Board
     private King whiteKing;
     private King blackKing;
     private char turn;
-    private boolean validMove;
 
     public Board()
     {
@@ -23,7 +22,6 @@ public class Board
         board[7][4] = whiteKing;
         board[0][4] = blackKing;
         turn = 'W';
-        validMove = true;
         initBoard('W', 6, 7);
         initBoard('B', 1, 0);
     }
@@ -43,8 +41,9 @@ public class Board
     }
 
 
-    public void makeMove(int startX, int startY, int endX, int endY)
+    public boolean makeMove(int startX, int startY, int endX, int endY)
     {
+        boolean validMove = true;
         boolean check = false;
         boolean checkmate = true;
         Piece piece = board[startY][startX];
@@ -378,9 +377,9 @@ public class Board
         }
         else
         {
-            System.out.println("That is not a valid move!");
-            validMove = true;
+            //System.out.println("That is not a valid move!");
         }
+        return validMove;
     }
 
     public Piece[][] getBoard() {return board;}
@@ -406,37 +405,4 @@ public class Board
     public char getTurn() {return turn;}
 
     public void setTurn(char t) {turn = t;}
-
-    public boolean getValid() {return validMove;}
-
-    public void setValid(boolean v) {validMove = v;}
-
-    public void printBoard()
-    {
-        for(int y = 0; y < 8; y++)
-        {
-            for(int x = 0; x < 8; x++)
-            {
-                Piece p = board[y][x];
-                if(p == null)
-                    System.out.print(" ");
-                else
-                {
-                    if(p instanceof Pawn)
-                        System.out.print("P");
-                    if(p instanceof Rook)
-                        System.out.print("R");
-                    if(p instanceof Knight)
-                        System.out.print("N");
-                    if(p instanceof Bishop)
-                        System.out.print("B");
-                    if(p instanceof Queen)
-                        System.out.print("Q");
-                    if(p instanceof King)
-                        System.out.print("K");
-                }
-            }
-            System.out.println("");
-        }
-    }
 }
