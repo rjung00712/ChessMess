@@ -6,7 +6,7 @@ import android.widget.GridView;
 
 public class ChessActivity extends AppCompatActivity {
 
-    int[] images = {    // chess background images per each square of the chess board
+    int[] images = {    // chess background images per each activity_square of the chess board
             R.drawable.tan_square, R.drawable.brown_square, R.drawable.tan_square, R.drawable.brown_square,
             R.drawable.tan_square, R.drawable.brown_square, R.drawable.tan_square, R.drawable.brown_square,
             R.drawable.brown_square, R.drawable.tan_square, R.drawable.brown_square, R.drawable.tan_square,
