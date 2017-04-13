@@ -2,7 +2,6 @@ package techiiesio.com.chessmess;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +21,8 @@ public class GridAdapter extends BaseAdapter {
     View view;
     LayoutInflater layoutInflater;
 
-
     public GridAdapter(Context context, int[] images) {
         this.context = context;
-
         this.images = images;
     }
 
@@ -47,29 +44,25 @@ public class GridAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 //        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
 //        if (convertView == null) {
 //            view = new View(context);
 //            view = layoutInflater.inflate(R.layout.item, null);
 
+        // get dimensions of width and height respective of screen resolution
         DisplayMetrics display = context.getResources().getDisplayMetrics();
         int squareWidth = display.widthPixels / 8;
         int squareHeight = display.heightPixels / 8;
 
-        Log.i("yo", Integer.toString(display.widthPixels));
-        Log.i("yo", Integer.toString(display.heightPixels));
 
+        ImageView pieceImage = new ImageView(context);
 
-        ImageView imageView = new ImageView(context);
+        ImageView squareImage = new ImageView(context);
+        squareImage.setLayoutParams(new GridView.LayoutParams(squareHeight, squareWidth));
+        squareImage.setImageResource(images[position]);
 
-        imageView.setLayoutParams(new GridView.LayoutParams(squareHeight, squareHeight));
-        imageView.setImageResource(images[position]);
-
-//            ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
 
 
 //        }
-        return imageView;
+        return squareImage;
     }
 }
