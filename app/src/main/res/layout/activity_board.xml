@@ -5,6 +5,7 @@
     tools:context=".ChessActivity" >
 
     <GridView
+<<<<<<< HEAD
         android:id="@+id/chessboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,3 +14,13 @@
         android:numColumns="8" >
     </GridView>
 </RelativeLayout>
+=======
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:numColumns="8" >
+    </GridView>
+</RelativeLayout>
+
+>>>>>>> 6df9ce5de582843be2b3d357fb483e373e3919ab
