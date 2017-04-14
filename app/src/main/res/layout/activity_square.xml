@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/square"
+<<<<<<< HEAD
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:background="#000080"
+=======
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+>>>>>>> 6df9ce5de582843be2b3d357fb483e373e3919ab
     android:orientation="vertical" >
 
     <ImageView
         android:id="@+id/square_background"
+<<<<<<< HEAD
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
+
+    <ImageView
+        android:id="@+id/piece"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+</FrameLayout> 
+=======
         android:adjustViewBounds="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -18,3 +36,4 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 </FrameLayout> 
+>>>>>>> 6df9ce5de582843be2b3d357fb483e373e3919ab
