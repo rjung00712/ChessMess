@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.Toast;
 
 public class ChessActivity extends AppCompatActivity {
 
@@ -102,23 +103,43 @@ public class ChessActivity extends AppCompatActivity {
         int endX = getX(position2);
         int endY = getY(position2);
         boolean moved = board.makeMove(startX, startY, endX, endY);
-//        if(moved) {
-//            setPieces(board.getBoard());
-//            flipBoard();
-//        }
-        setPieces(board.getBoard());
+        if(moved)
+        {
+            setPieces(board.getBoard());
+            flipBoard();
+            if(board.getCheckmate())
+            {
+                Toast toast = Toast.makeText(this, "Checkmate!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else if(board.getCheck())
+            {
+                Toast toast = Toast.makeText(this, "Check!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
+        else
+        {
+            Toast toast = Toast.makeText(this, "That is not a valid move!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
         GridAdapter gridAdapter = new GridAdapter(this, images, pieces, this);
         gridView.setAdapter(gridAdapter);
     }
 
     public int getX(int position)
     {
-        return position % 8;
+        if(board.getTurn() == 'W')
+            return position % 8;
+        return (63 - position) % 8;
     }
 
     public int getY(int position)
     {
-        return position / 8;
+        if(board.getTurn() == 'W')
+            return position / 8;
+        else
+            return (63 - position) / 8;
     }
 
     public void setPieces(Piece[][] p)
@@ -183,7 +204,5 @@ public class ChessActivity extends AppCompatActivity {
         for(int i = 0; i < pieces.length; i++, x--)
             temp[x] = pieces[i];
         pieces = temp;
-        GridAdapter gridAdapter = new GridAdapter(this, images, pieces, this);
-        gridView.setAdapter(gridAdapter);
     }
 }

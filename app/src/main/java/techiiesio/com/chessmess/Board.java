@@ -10,6 +10,8 @@ public class Board
     private King whiteKing;
     private King blackKing;
     private char turn;
+    private boolean check;
+    private boolean checkmate;
 
     public Board()
     {
@@ -24,6 +26,8 @@ public class Board
         turn = 'W';
         initBoard('W', 6, 7);
         initBoard('B', 1, 0);
+        check = false;
+        checkmate = false;
     }
 
     //Initializes the board with the correct pieces in the correct spots
@@ -44,8 +48,8 @@ public class Board
     public boolean makeMove(int startX, int startY, int endX, int endY)
     {
         boolean validMove = true;
-        boolean check = false;
-        boolean checkmate = true;
+        check = false;
+        checkmate = true;
         Piece piece = board[startY][startX];
 
         if(piece == null || piece.getColor() != turn)
@@ -368,6 +372,10 @@ public class Board
                 else
                     System.out.println("Check");
             }
+            else
+            {
+                checkmate = false;
+            }
         }
         if(validMove)
         {
@@ -406,4 +414,8 @@ public class Board
     public char getTurn() {return turn;}
 
     public void setTurn(char t) {turn = t;}
+
+    public boolean getCheckmate() {return checkmate;}
+
+    public boolean getCheck() {return check;}
 }
