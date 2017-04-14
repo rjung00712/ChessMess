@@ -1,6 +1,8 @@
 package techiiesio.com.chessmess;
 
+import android.content.ClipData;
 import android.content.Context;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -25,7 +27,7 @@ public class GridAdapter extends BaseAdapter {
     boolean containsDragable;
     ChessActivity chessActivity;
 
-//    int position;
+    int position;
 
     public GridAdapter(Context context, int[] images, int[] pieces, ChessActivity chessActivity) {
         this.context = context;
@@ -57,7 +59,7 @@ public class GridAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.activity_square, null);
 
 
-//            this.position = position;
+            this.position = position;
 
             // get dimensions of width and height respective of screen resolution
             DisplayMetrics display = context.getResources().getDisplayMetrics();
@@ -85,25 +87,7 @@ public class GridAdapter extends BaseAdapter {
 
             squareImage.setOnDragListener(new MyDragListener());
 
-//            pieceImage.setOnTouchListener(new MyTouchListener());
-
-            pieceImage.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                        if (chessActivity.isHasOne()) {
-                            chessActivity.setPosition2(position);
-                            chessActivity.move();
-                            chessActivity.setHasOne(false);
-                        } else {
-                            chessActivity.setPosition1(position);
-                            chessActivity.setHasOne(true);
-                            squareImage.setBackgroundResource(R.drawable.tan_square);
-                        }
-                    }
-                    return true;
-                }
-            });
+            pieceImage.setOnTouchListener(new MyTouchListener());
 
     }
 
@@ -144,29 +128,26 @@ public class GridAdapter extends BaseAdapter {
 //        return view;
 //    }
 
-//    // This defines your touch listener
-//    private final class MyTouchListener implements View.OnTouchListener {
-//        public boolean onTouch(View view, MotionEvent motionEvent) {
-//            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-//                ClipData data = ClipData.newPlainText("", "");
-//                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(
-//                        view);
-//
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                    view.startDragAndDrop(data, shadowBuilder, view, 0);
-//                } else {
-//                    view.startDrag(data, shadowBuilder, view, 0);
-//                }
-//                view.setVisibility(View.INVISIBLE);
-//                return true;
-//            } else {
-//                return false;
-//            }
-//        }
-//    }
+    // This defines your touch listener
+    private final class MyTouchListener implements View.OnTouchListener {
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                ClipData data = ClipData.newPlainText("", "");
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(
+                        view);
 
-
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    view.startDragAndDrop(data, shadowBuilder, view, 0);
+                } else {
+                    view.startDrag(data, shadowBuilder, view, 0);
+                }
+                view.setVisibility(View.INVISIBLE);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
 
     class MyDragListener implements View.OnDragListener {
@@ -207,7 +188,7 @@ public class GridAdapter extends BaseAdapter {
                 case DragEvent.ACTION_DROP:
                     if (containsDragable) {
 
-//                        checkMove();
+                        checkMove();
 ///////////////////////////////////////////
 
                         dragView.setVisibility(View.VISIBLE);
@@ -256,15 +237,13 @@ public class GridAdapter extends BaseAdapter {
         }
     }
 
-//    private void checkMove() {
-////
-//        chessActivity.setPosition2(position);
-//        chessActivity.move();
-//        chessActivity.setHasOne(false);
+    private void checkMove() {
 //
-//
-//
-//    }
+        chessActivity.setPosition2(position);
+        chessActivity.move();
+        chessActivity.setHasOne(false);
+
+    }
 
 
     //    squareImage.setOnTouchListener(new View.OnTouchListener() {
