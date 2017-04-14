@@ -83,7 +83,7 @@ public class Knight extends Piece
                 valid[yCoord + 1][xCoord + 2] = true;
         }
 
-        if(valid[y][x] && attacking)
+        if(valid[y][x] && !attacking)
             if(causesCheck(x, y, b))
                 valid[y][x] = false;
 

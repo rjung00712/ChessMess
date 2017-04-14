@@ -47,17 +47,24 @@ public class ChessActivity extends AppCompatActivity {
 
     GridView gridView;  // gridview object that references the grid view container
     private Board board;
+    private boolean hasOne;
+    private int position1;
+    private int position2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chess);
+        position1 = 0;
+        position2 = 0;
+        hasOne = false;
+        board = new Board();
 
         gridView = (GridView) findViewById(R.id.gridView);
 
         gridView.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 
-        GridAdapter gridAdapter = new GridAdapter(this, images, pieces);
+        GridAdapter gridAdapter = new GridAdapter(this, images, pieces, this);
         gridView.setAdapter(gridAdapter);
     }
 
@@ -70,6 +77,48 @@ public class ChessActivity extends AppCompatActivity {
 
     protected void initializeBoard() {
 
+    }
+
+    public Board getBoard() {return board;}
+
+    public void setBoard(Board b) {board = b;}
+
+    public void setHasOne(boolean h) {hasOne = h;}
+
+    public void setPosition1(int p) {position1 = p;}
+
+    public void setPosition2(int p) {position2 = p;}
+
+    public int getPosition1() {return position1;}
+
+    public int getPosition2() {return position2;}
+
+    public boolean isHasOne() {return hasOne;}
+
+    public void move()
+    {
+        int startX = getX(position1);
+        int startY = getY(position1);
+        int endX = getX(position2);
+        int endY = getY(position2);
+        boolean moved = board.makeMove(startX, startY, endX, endY);
+//        if(moved) {
+//            setPieces(board.getBoard());
+//            flipBoard();
+//        }
+        setPieces(board.getBoard());
+        GridAdapter gridAdapter = new GridAdapter(this, images, pieces, this);
+        gridView.setAdapter(gridAdapter);
+    }
+
+    public int getX(int position)
+    {
+        return position % 8;
+    }
+
+    public int getY(int position)
+    {
+        return position / 8;
     }
 
     public void setPieces(Piece[][] p)
@@ -127,12 +176,14 @@ public class ChessActivity extends AppCompatActivity {
             }
     }
 
-    public void flipBoard(View v)
+    public void flipBoard()
     {
         int[] temp = new int[pieces.length];
         int x = pieces.length - 1;
         for(int i = 0; i < pieces.length; i++, x--)
             temp[x] = pieces[i];
         pieces = temp;
+        GridAdapter gridAdapter = new GridAdapter(this, images, pieces, this);
+        gridView.setAdapter(gridAdapter);
     }
 }

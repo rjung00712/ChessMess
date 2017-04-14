@@ -3,6 +3,7 @@ package techiiesio.com.chessmess;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,11 +22,13 @@ public class GridAdapter extends BaseAdapter {
     int[] pieces;
     View view;
     LayoutInflater layoutInflater;
+    ChessActivity chessActivity;
 
-    public GridAdapter(Context context, int[] images, int[] pieces) {
+    public GridAdapter(Context context, int[] images, int[] pieces, ChessActivity chessActivity) {
         this.context = context;
         this.images = images;
         this.pieces = pieces;
+        this.chessActivity = chessActivity;
     }
 
     @Override
@@ -44,7 +47,7 @@ public class GridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 //        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //        if (convertView == null) {
 //            view = new View(context);
@@ -58,12 +61,28 @@ public class GridAdapter extends BaseAdapter {
 
         ImageView pieceImage = new ImageView(context);
 
-        ImageView squareImage = new ImageView(context);
+        final ImageView squareImage = new ImageView(context);
         squareImage.setLayoutParams(new GridView.LayoutParams(squareWidth, squareWidth));
         squareImage.setBackgroundResource(images[position]);
         if(pieces[position] != -1)
             squareImage.setImageResource(pieces[position]);
-
+        squareImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (chessActivity.isHasOne()) {
+                        chessActivity.setPosition2(position);
+                        chessActivity.move();
+                        chessActivity.setHasOne(false);
+                    } else {
+                        chessActivity.setPosition1(position);
+                        chessActivity.setHasOne(true);
+                        squareImage.setBackgroundResource(R.drawable.red_square);
+                    }
+                }
+                return true;
+            }
+        });
 
 
 //        }

@@ -47,7 +47,8 @@ public class Board
         boolean check = false;
         boolean checkmate = true;
         Piece piece = board[startY][startX];
-        if(piece.getColor() != turn)
+
+        if(piece == null || piece.getColor() != turn)
             validMove = false;
         if(validMove)
         {
