@@ -29,7 +29,7 @@ public class Bishop extends Piece
             tempY--;
         }
         if(tempX >= 0 && tempY >= 0)
-            if(board[tempY][tempX].getColor() != this.Color)
+            if(board[tempY][tempX].getColor() != this.Color || attacking)
                 valid[tempY][tempX] = true;
 
         //Checks all valid spots in the up and right diagonal
@@ -42,7 +42,7 @@ public class Bishop extends Piece
             tempY--;
         }
         if(tempX <= 7 && tempY >= 0)
-            if(board[tempY][tempX].getColor() != this.Color)
+            if(board[tempY][tempX].getColor() != this.Color || attacking)
                 valid[tempY][tempX] = true;
 
         //Checks all valid spots in the down and left diagonal
@@ -55,7 +55,7 @@ public class Bishop extends Piece
             tempY++;
         }
         if(tempX >= 0 && tempY <= 7)
-            if(board[tempY][tempX].getColor() != this.Color)
+            if(board[tempY][tempX].getColor() != this.Color || attacking)
                 valid[tempY][tempX] = true;
 
         //Checks all valid spots in the down and right diagonal
@@ -68,7 +68,7 @@ public class Bishop extends Piece
             tempY++;
         }
         if(tempX <= 7 && tempY <= 7)
-            if(board[tempY][tempX].getColor() != this.Color)
+            if(board[tempY][tempX].getColor() != this.Color || attacking)
                 valid[tempY][tempX] = true;
 
         if(valid[y][x] && !attacking)

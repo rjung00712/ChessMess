@@ -263,7 +263,7 @@ public class Board
                     if(endX == startX + 2)
                     {
                         Rook r = (Rook) board[startY][7];
-                        r.setCoords(startY, 5);
+                        r.setCoords(5, startY);
                         r.setMoved(true);
                         board[startY][5] = r;
                         board[startY][7] = null;
@@ -271,7 +271,7 @@ public class Board
                     else if(endX == startX - 2)
                     {
                         Rook r = (Rook) board[startY][0];
-                        r.setCoords(startY, 3);
+                        r.setCoords(3, startY);
                         r.setMoved(true);
                         board[startY][3] = r;
                         board[startY][0] = null;

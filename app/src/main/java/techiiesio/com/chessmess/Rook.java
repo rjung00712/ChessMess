@@ -27,7 +27,7 @@ public class Rook extends Piece
             tempX--;
         }
         if(tempX >= 0)
-            if(board[yCoord][tempX].getColor() != this.Color)
+            if(board[yCoord][tempX].getColor() != this.Color || attacking)
                 valid[yCoord][tempX] = true;
 
         //Checks all valid spots to the right
@@ -38,7 +38,7 @@ public class Rook extends Piece
             tempX++;
         }
         if(tempX <= 7)
-            if(board[yCoord][tempX].getColor() != this.Color)
+            if(board[yCoord][tempX].getColor() != this.Color || attacking)
                 valid[yCoord][tempX] = true;
 
         //Checks all valid spots above
@@ -49,7 +49,7 @@ public class Rook extends Piece
             tempY--;
         }
         if(tempY >= 0)
-            if(board[tempY][xCoord].getColor() != this.Color)
+            if(board[tempY][xCoord].getColor() != this.Color || attacking)
                 valid[tempY][xCoord] = true;
 
         //Checks all valid spots below
@@ -60,7 +60,7 @@ public class Rook extends Piece
             tempY++;
         }
         if(tempY <= 7)
-            if(board[tempY][xCoord].getColor() != this.Color)
+            if(board[tempY][xCoord].getColor() != this.Color || attacking)
                 valid[tempY][xCoord] = true;
 
         if(valid[y][x] && !attacking)

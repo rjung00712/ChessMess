@@ -23,7 +23,7 @@ public class Knight extends Piece
         if(xCoord - 1 >= 0 && yCoord - 2 >= 0)
         {
             if(board[yCoord - 2][xCoord - 1] == null
-                    || board[yCoord - 2][xCoord - 1].getColor() != this.Color)
+                    || board[yCoord - 2][xCoord - 1].getColor() != this.Color || attacking)
                 valid[yCoord - 2][xCoord - 1] = true;
         }
 
@@ -31,7 +31,7 @@ public class Knight extends Piece
         if(xCoord + 1 <= 7 && yCoord - 2 >= 0)
         {
             if(board[yCoord - 2][xCoord + 1] == null
-                    || board[yCoord - 2][xCoord + 1].getColor() != this.Color)
+                    || board[yCoord - 2][xCoord + 1].getColor() != this.Color || attacking)
                 valid[yCoord - 2][xCoord + 1] = true;
         }
 
@@ -39,7 +39,7 @@ public class Knight extends Piece
         if(xCoord - 1 >= 0 && yCoord + 2 <= 7)
         {
             if(board[yCoord + 2][xCoord - 1] == null
-                    || board[yCoord + 2][xCoord - 1].getColor() != this.Color)
+                    || board[yCoord + 2][xCoord - 1].getColor() != this.Color || attacking)
                 valid[yCoord + 2][xCoord - 1] = true;
         }
 
@@ -47,7 +47,7 @@ public class Knight extends Piece
         if(xCoord + 1 <= 7 && yCoord + 2 <= 7)
         {
             if(board[yCoord + 2][xCoord + 1] == null
-                    || board[yCoord + 2][xCoord + 1].getColor() != this.Color)
+                    || board[yCoord + 2][xCoord + 1].getColor() != this.Color || attacking)
                 valid[yCoord + 2][xCoord + 1] = true;
         }
 
@@ -55,7 +55,7 @@ public class Knight extends Piece
         if(xCoord - 2 >= 0 && yCoord - 1 >= 0)
         {
             if(board[yCoord - 1][xCoord - 2] == null
-                    || board[yCoord - 1][xCoord - 2].getColor() != this.Color)
+                    || board[yCoord - 1][xCoord - 2].getColor() != this.Color || attacking)
                 valid[yCoord - 1][xCoord - 2] = true;
         }
 
@@ -63,7 +63,7 @@ public class Knight extends Piece
         if(xCoord + 2 <= 7 && yCoord - 1 >= 0)
         {
             if(board[yCoord - 1][xCoord + 2] == null
-                    || board[yCoord - 1][xCoord + 2].getColor() != this.Color)
+                    || board[yCoord - 1][xCoord + 2].getColor() != this.Color || attacking)
                 valid[yCoord - 1][xCoord + 2] = true;
         }
 
@@ -71,7 +71,7 @@ public class Knight extends Piece
         if(xCoord - 2 >= 0 && yCoord + 1 <= 7)
         {
             if(board[yCoord + 1][xCoord - 2] == null
-                    || board[yCoord + 1][xCoord - 2].getColor() != this.Color)
+                    || board[yCoord + 1][xCoord - 2].getColor() != this.Color || attacking)
                 valid[yCoord + 1][xCoord - 2] = true;
         }
 
@@ -79,7 +79,7 @@ public class Knight extends Piece
         if(xCoord + 2 <= 7 && yCoord + 1 <= 7)
         {
             if(board[yCoord + 1][xCoord + 2] == null
-                    || board[yCoord + 1][xCoord + 2].getColor() != this.Color)
+                    || board[yCoord + 1][xCoord + 2].getColor() != this.Color || attacking)
                 valid[yCoord + 1][xCoord + 2] = true;
         }
 
