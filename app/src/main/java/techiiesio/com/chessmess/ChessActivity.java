@@ -1,11 +1,20 @@
 package techiiesio.com.chessmess;
 
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 
 public class ChessActivity extends AppCompatActivity {
 
@@ -75,6 +84,65 @@ public class ChessActivity extends AppCompatActivity {
         super.onStart();
 
         initializeBoard();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        switch(item.getItemId()) {
+            case R.id.saveGame:
+                saveGame();
+                return true;
+            case R.id.loadGame:
+                loadGame();
+                return true;
+            case R.id.newGame:
+                newGame();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void saveGame() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+
+        String json = gson.toJson(board.getBoard());
+        editor.putString("board", json);
+        editor.commit();
+
+        Toast toast = Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    private void loadGame() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("board", null);
+        Type type = new TypeToken<Piece[][]>() {}.getType();
+
+
+        if(json != null){
+            Piece[][] temp = gson.fromJson(json, type);
+            board.setBoard(temp);
+            setPieces(temp);
+        }
+    }
+
+    private void newGame() {
+
     }
 
     protected void initializeBoard() {
