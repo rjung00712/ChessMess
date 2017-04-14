@@ -1,5 +1,6 @@
 package techiiesio.com.chessmess;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -112,11 +113,15 @@ public class ChessActivity extends AppCompatActivity {
             {
                 Toast toast = Toast.makeText(this, "Checkmate!", Toast.LENGTH_SHORT);
                 toast.show();
+                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.checkmate);
+                mp.start();
             }
             else if(board.getCheck())
             {
                 Toast toast = Toast.makeText(this, "Check!", Toast.LENGTH_SHORT);
                 toast.show();
+                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.toasty);
+                mp.start();
             }
         }
         else
