@@ -106,7 +106,8 @@ public class ChessActivity extends AppCompatActivity {
         if(moved)
         {
             setPieces(board.getBoard());
-            flipBoard();
+            if(board.getTurn() == 'B')
+                flipBoard();
             if(board.getCheckmate())
             {
                 Toast toast = Toast.makeText(this, "Checkmate!", Toast.LENGTH_SHORT);
