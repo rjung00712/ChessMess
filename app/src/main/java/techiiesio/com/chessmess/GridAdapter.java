@@ -202,7 +202,7 @@ public class GridAdapter extends BaseAdapter {
                 case DragEvent.ACTION_DRAG_EXITED:
                     containsDragable = false;
 
-                    // v.setBackgroundDrawable(normalShape);
+
                     break;
                 case DragEvent.ACTION_DROP:
                     if (containsDragable) {
