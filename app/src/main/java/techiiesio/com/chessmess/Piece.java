@@ -11,6 +11,7 @@ public class Piece
     protected int yCoord;	//Y coordinate of the piece
     protected boolean moved;	//Says whether or not the piece has been moved
     protected char type;    //Holds the type of the piece
+    protected int enPassant;
 
     public Piece(char c, int x, int y)
     {
@@ -88,4 +89,8 @@ public class Piece
         yCoord = tempY;
         return false;
     }
+
+    public int getEnPassant() {return enPassant;}
+
+    public void setEnPassant(int e) {enPassant = e;}
 }

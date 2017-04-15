@@ -430,6 +430,7 @@ public class Board
                     {
                         Pawn p = new Pawn(board[i][j].getColor(), board[i][j].getX(), board[i][j].getY());
                         p.setMoved(board[i][j].hasMoved());
+                        p.setEnPassant(board[i][j].getEnPassant());
                         board[i][j] = p;
                     }
                     if (board[i][j].getType() == 'N')

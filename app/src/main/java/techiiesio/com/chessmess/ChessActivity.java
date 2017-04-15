@@ -130,13 +130,9 @@ public class ChessActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("board", "");
-        //Type type = new TypeToken<Piece[][]>() {}.getType();
 
 
         if(json != null){
-//            Piece[][] temp = gson.fromJson(json, null);
-//            board.setBoard(temp);
-//            setPieces(temp);
             board = gson.fromJson(json, Board.class);
             board.generateNewPieces();
             setPieces(board.getBoard());

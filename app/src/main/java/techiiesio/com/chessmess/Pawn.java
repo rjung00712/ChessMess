@@ -6,12 +6,11 @@ package techiiesio.com.chessmess;
 
 public class Pawn extends Piece
 {
-    private int enPassant;
-
     public Pawn(char c, int x, int y)
     {
         super(c, x, y);
         type = 'P';
+        enPassant = 0;
     }
 
     public boolean isValid(int x, int y, Board b, boolean attacking)
@@ -191,8 +190,4 @@ public class Pawn extends Piece
             }
         return false;
     }
-
-    public int getEnPassant() {return enPassant;}
-
-    public void setEnPassant(int e) {enPassant = e;}
 }
