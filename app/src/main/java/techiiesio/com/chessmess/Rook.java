@@ -9,6 +9,7 @@ public class Rook extends Piece
     public Rook(char c, int x, int y)
     {
         super(c, x, y);
+        type = 'R';
     }
 
     public boolean isValid(int x, int y, Board b, boolean attacking)

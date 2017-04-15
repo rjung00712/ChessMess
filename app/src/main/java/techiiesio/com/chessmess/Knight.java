@@ -9,6 +9,7 @@ public class Knight extends Piece
     public Knight(char c, int x, int y)
     {
         super(c, x, y);
+        type = 'N';
     }
 
     public boolean isValid(int x, int y, Board b, boolean attacking)

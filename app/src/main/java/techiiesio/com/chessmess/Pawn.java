@@ -11,6 +11,7 @@ public class Pawn extends Piece
     public Pawn(char c, int x, int y)
     {
         super(c, x, y);
+        type = 'P';
     }
 
     public boolean isValid(int x, int y, Board b, boolean attacking)

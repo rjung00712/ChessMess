@@ -9,6 +9,7 @@ public class Queen extends Piece
     public Queen(char c, int x, int y)
     {
         super(c, x, y);
+        type = 'Q';
     }
 
     public boolean isValid(int x, int y, Board b, boolean attacking)

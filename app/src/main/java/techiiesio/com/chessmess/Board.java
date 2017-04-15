@@ -418,4 +418,51 @@ public class Board
     public boolean getCheckmate() {return checkmate;}
 
     public boolean getCheck() {return check;}
+
+    public void generateNewPieces()
+    {
+        for(int i = 0; i < 8; i++)
+            for(int j = 0; j < 8; j++)
+            {
+                if(board[i][j] != null)
+                {
+                    if (board[i][j].getType() == 'P')
+                    {
+                        Pawn p = new Pawn(board[i][j].getColor(), board[i][j].getX(), board[i][j].getY());
+                        p.setMoved(board[i][j].hasMoved());
+                        board[i][j] = p;
+                    }
+                    if (board[i][j].getType() == 'N')
+                    {
+                        Knight kn = new Knight(board[i][j].getColor(), board[i][j].getX(), board[i][j].getY());
+                        kn.setMoved(board[i][j].hasMoved());
+                        board[i][j] = kn;
+                    }
+                    if (board[i][j].getType() == 'B')
+                    {
+                        Bishop b = new Bishop(board[i][j].getColor(), board[i][j].getX(), board[i][j].getY());
+                        b.setMoved(board[i][j].hasMoved());
+                        board[i][j] = b;
+                    }
+                    if (board[i][j].getType() == 'R')
+                    {
+                        Rook r = new Rook(board[i][j].getColor(), board[i][j].getX(), board[i][j].getY());
+                        r.setMoved(board[i][j].hasMoved());
+                        board[i][j] = r;
+                    }
+                    if (board[i][j].getType() == 'Q')
+                    {
+                        Queen q = new Queen(board[i][j].getColor(), board[i][j].getX(), board[i][j].getY());
+                        q.setMoved(board[i][j].hasMoved());
+                        board[i][j] = q;
+                    }
+                    if (board[i][j].getType() == 'K')
+                    {
+                        King k = new King(board[i][j].getColor(), board[i][j].getX(), board[i][j].getY());
+                        k.setMoved(board[i][j].hasMoved());
+                        board[i][j] = k;
+                    }
+                }
+            }
+    }
 }

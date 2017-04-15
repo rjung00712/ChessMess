@@ -82,8 +82,6 @@ public class ChessActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        initializeBoard();
     }
 
     @Override
@@ -119,7 +117,8 @@ public class ChessActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
 
-        String json = gson.toJson(board.getBoard());
+//        String json = gson.toJson(board.getBoard());
+        String json = gson.toJson(board);
         editor.putString("board", json);
         editor.commit();
 
@@ -130,23 +129,29 @@ public class ChessActivity extends AppCompatActivity {
     private void loadGame() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("board", null);
-        Type type = new TypeToken<Piece[][]>() {}.getType();
+        String json = sharedPreferences.getString("board", "");
+        //Type type = new TypeToken<Piece[][]>() {}.getType();
 
 
         if(json != null){
-            Piece[][] temp = gson.fromJson(json, type);
-            board.setBoard(temp);
-            setPieces(temp);
+//            Piece[][] temp = gson.fromJson(json, null);
+//            board.setBoard(temp);
+//            setPieces(temp);
+            board = gson.fromJson(json, Board.class);
+            board.generateNewPieces();
+            setPieces(board.getBoard());
+            if(board.getTurn() == 'B')
+                flipBoard();
+            GridAdapter gridAdapter = new GridAdapter(this, images, pieces, this);
+            gridView.setAdapter(gridAdapter);
         }
     }
 
     private void newGame() {
-
-    }
-
-    protected void initializeBoard() {
-
+        board = new Board();
+        setPieces(board.getBoard());
+        GridAdapter gridAdapter = new GridAdapter(this, images, pieces, this);
+        gridView.setAdapter(gridAdapter);
     }
 
     public Board getBoard() {return board;}
@@ -196,6 +201,8 @@ public class ChessActivity extends AppCompatActivity {
         {
             Toast toast = Toast.makeText(this, "That is not a valid move!", Toast.LENGTH_SHORT);
             toast.show();
+            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.illogical);
+            mp.start();
         }
         GridAdapter gridAdapter = new GridAdapter(this, images, pieces, this);
         gridView.setAdapter(gridAdapter);
@@ -258,7 +265,7 @@ public class ChessActivity extends AppCompatActivity {
                         else
                             pieces[(8 * i) + j] = R.drawable.black_queen;
                     }
-                    else
+                    else if(p[i][j] instanceof King)
                     {
                         if(p[i][j].getColor() == 'W')
                             pieces[(8 * i) + j] = R.drawable.white_king;

@@ -9,6 +9,7 @@ public class Bishop extends Piece
     public Bishop(char c, int x, int y)
     {
         super(c, x, y);
+        type = 'B';
     }
 
     public boolean isValid(int x, int y, Board b, boolean attacking)
