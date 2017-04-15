@@ -1,13 +1,19 @@
 package techiiesio.com.chessmess;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -15,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Collections;
 
 public class ChessActivity extends AppCompatActivity {
 
@@ -61,6 +68,7 @@ public class ChessActivity extends AppCompatActivity {
     private boolean hasOne;
     private int position1;
     private int position2;
+    String userChoice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +183,9 @@ public class ChessActivity extends AppCompatActivity {
         boolean moved = board.makeMove(startX, startY, endX, endY);
         if(moved)
         {
+            if ((endY == 0 || endY == 7) && board.getBoard()[endY][endX] instanceof Pawn)
+                createAlert(endX, endY);
+
             setPieces(board.getBoard());
             if(board.getTurn() == 'B')
                 flipBoard();
@@ -281,5 +292,56 @@ public class ChessActivity extends AppCompatActivity {
         for(int i = 0; i < pieces.length; i++, x--)
             temp[x] = pieces[i];
         pieces = temp;
+    }
+
+    public void createAlert(final int x, final int y) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // get the layout inflater
+        LayoutInflater inflater = this.getLayoutInflater();
+
+        View mView = inflater.inflate(R.layout.user_choice, null);
+        final EditText editText = (EditText) mView.findViewById(R.id.userchoice);
+
+        // inflate and set the layout for the dialog
+        // pass null as a parent view because its going in the dialog layout
+        builder.setView(mView)
+                .setPositiveButton("enter", new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        userChoice = editText.getText().toString().toLowerCase();
+
+                        if(!userChoice.equals("queen") &&
+                                !userChoice.equals("rook") &&
+                                !userChoice.equals("knight") &&
+                                !userChoice.equals("bishop")) {
+                            Toast.makeText(ChessActivity.this, "Please enter Queen, Rook, Knight, or Bishop", Toast.LENGTH_SHORT).show();
+                            createAlert(x, y);
+                        }
+                        board.updateBoard(x, y, userChoice);
+                        setPieces(board.getBoard());
+                        if(board.getTurn() == 'B')
+                            flipBoard();
+                        if(board.getCheckmate())
+                        {
+                            Toast toast = Toast.makeText(ChessActivity.this, "Checkmate!", Toast.LENGTH_SHORT);
+                            toast.show();
+                            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.checkmate);
+                            mp.start();
+                        }
+                        else if(board.getCheck())
+                        {
+                            Toast toast = Toast.makeText(ChessActivity.this, "Check!", Toast.LENGTH_SHORT);
+                            toast.show();
+                            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.toasty);
+                            mp.start();
+                        }
+
+                        GridAdapter gridAdapter = new GridAdapter(ChessActivity.this, images, pieces, ChessActivity.this);
+                        gridView.setAdapter(gridAdapter);
+                    }
+                });
+        builder.setCancelable(false);
+        builder.show();
     }
 }

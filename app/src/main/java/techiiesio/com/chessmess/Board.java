@@ -71,91 +71,91 @@ public class Board
                     {
                         if(board[endY + 1][endX] != null && board[endY + 1][endX].getColor() != p.getColor())
                             board[endY + 1][endX] = null;
-                        if(endY == 0)
-                        {
-                            int choice = 0;		//This will be changed, it was used for testing
-                            switch(choice)
-                            {
-                                case 0:
-                                    Queen q = new Queen('W', p.getX(), p.getY());
-                                    q.setMoved(true);
-                                    board[endY][endX] = q;
-                                    if(q.isValid(blackKing.getX(), blackKing.getY(), this, true))
-                                        check = true;
-                                    break;
-                                case 1:
-                                    Knight kn = new Knight('W', p.getX(), p.getY());
-                                    kn.setMoved(true);
-                                    board[endY][endX] = kn;
-                                    if(kn.isValid(blackKing.getX(), blackKing.getY(), this, true))
-                                        check = true;
-                                    break;
-                                case 2:
-                                    Bishop b = new Bishop('W', p.getX(), p.getY());
-                                    b.setMoved(true);
-                                    board[endY][endX] = b;
-                                    if(b.isValid(blackKing.getX(), blackKing.getY(), this, true))
-                                        check = true;
-                                    break;
-                                case 3:
-                                    Rook r = new Rook('W', p.getX(), p.getY());
-                                    r.setMoved(true);
-                                    board[endY][endX] = r;
-                                    if(r.isValid(blackKing.getX(), blackKing.getY(), this, true))
-                                        check = true;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            if(p.isValid(blackKing.getX(), blackKing.getY(), this, true))
-                                check = true;
-                        }
+//                        if(endY == 0)
+//                        {
+//                            int choice = 0;		//This will be changed, it was used for testing
+//                            switch(choice)
+//                            {
+//                                case 0:
+//                                    Queen q = new Queen('W', p.getX(), p.getY());
+//                                    q.setMoved(true);
+//                                    board[endY][endX] = q;
+//                                    if(q.isValid(blackKing.getX(), blackKing.getY(), this, true))
+//                                        check = true;
+//                                    break;
+//                                case 1:
+//                                    Knight kn = new Knight('W', p.getX(), p.getY());
+//                                    kn.setMoved(true);
+//                                    board[endY][endX] = kn;
+//                                    if(kn.isValid(blackKing.getX(), blackKing.getY(), this, true))
+//                                        check = true;
+//                                    break;
+//                                case 2:
+//                                    Bishop b = new Bishop('W', p.getX(), p.getY());
+//                                    b.setMoved(true);
+//                                    board[endY][endX] = b;
+//                                    if(b.isValid(blackKing.getX(), blackKing.getY(), this, true))
+//                                        check = true;
+//                                    break;
+//                                case 3:
+//                                    Rook r = new Rook('W', p.getX(), p.getY());
+//                                    r.setMoved(true);
+//                                    board[endY][endX] = r;
+//                                    if(r.isValid(blackKing.getX(), blackKing.getY(), this, true))
+//                                        check = true;
+//                                    break;
+//                            }
+//                        }
+//                        else
+//                        {
+//                            if(p.isValid(blackKing.getX(), blackKing.getY(), this, true))
+//                                check = true;
+//                        }
                     }
                     else
                     {
                         if(board[endY - 1][endX] != null && board[endY - 1][endX].getColor() != p.getColor())
                             board[endY - 1][endX] = null;
-                        if(p.getY() == 7)
-                        {
-                            int choice = 0;
-                            switch(choice)
-                            {
-                                case 0:
-                                    Queen q = new Queen('B', p.getX(), p.getY());
-                                    q.setMoved(true);
-                                    board[endY][endX] = q;
-                                    if(q.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
-                                        check = true;
-                                    break;
-                                case 1:
-                                    Knight kn = new Knight('B', p.getX(), p.getY());
-                                    kn.setMoved(true);
-                                    board[endY][endX] = kn;
-                                    if(kn.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
-                                        check = true;
-                                    break;
-                                case 2:
-                                    Bishop b = new Bishop('B', p.getX(), p.getY());
-                                    b.setMoved(true);
-                                    board[endY][endX] = b;
-                                    if(b.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
-                                        check = true;
-                                    break;
-                                case 3:
-                                    Rook r = new Rook('B', p.getX(), p.getY());
-                                    r.setMoved(true);
-                                    board[endY][endX] = r;
-                                    if(r.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
-                                        check = true;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            if(p.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
-                                check = true;
-                        }
+//                        if(p.getY() == 7)
+//                        {
+//                            int choice = 0;
+//                            switch(choice)
+//                            {
+//                                case 0:
+//                                    Queen q = new Queen('B', p.getX(), p.getY());
+//                                    q.setMoved(true);
+//                                    board[endY][endX] = q;
+//                                    if(q.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
+//                                        check = true;
+//                                    break;
+//                                case 1:
+//                                    Knight kn = new Knight('B', p.getX(), p.getY());
+//                                    kn.setMoved(true);
+//                                    board[endY][endX] = kn;
+//                                    if(kn.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
+//                                        check = true;
+//                                    break;
+//                                case 2:
+//                                    Bishop b = new Bishop('B', p.getX(), p.getY());
+//                                    b.setMoved(true);
+//                                    board[endY][endX] = b;
+//                                    if(b.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
+//                                        check = true;
+//                                    break;
+//                                case 3:
+//                                    Rook r = new Rook('B', p.getX(), p.getY());
+//                                    r.setMoved(true);
+//                                    board[endY][endX] = r;
+//                                    if(r.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
+//                                        check = true;
+//                                    break;
+//                            }
+//                        }
+//                        else
+//                        {
+//                            if(p.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
+//                                check = true;
+//                        }
                     }
                 }
                 else
@@ -367,10 +367,6 @@ public class Board
                     else
                         break;
                 }
-                if(checkmate)
-                    System.out.println("Checkmate");
-                else
-                    System.out.println("Check");
             }
             else
             {
@@ -465,5 +461,146 @@ public class Board
                     }
                 }
             }
+    }
+
+    public void updateBoard(int x, int y, String userChoice)
+    {
+        check = false;
+        checkmate = false;
+        Piece piece = board[y][x];
+        if(y == 0)
+        {
+            if (userChoice.equals("queen")) {
+                Queen q = new Queen(board[y][x].getColor(), x, y);
+                q.setMoved(true);
+                board[y][x] = q;
+                if (q.isValid(blackKing.getX(), blackKing.getY(), this, true))
+                    check = true;
+            }
+            if (userChoice.equals("rook")) {
+                Rook r = new Rook(board[y][x].getColor(), x, y);
+                r.setMoved(true);
+                board[y][x] = r;
+                if (r.isValid(blackKing.getX(), blackKing.getY(), this, true))
+                    check = true;
+            }
+            if (userChoice.equals("knight")) {
+                Knight kn = new Knight(board[y][x].getColor(), x, y);
+                kn.setMoved(true);
+                board[y][x] = kn;
+                if (kn.isValid(blackKing.getX(), blackKing.getY(), this, true))
+                    check = true;
+            }
+            if (userChoice.equals("bishop")) {
+                Bishop b = new Bishop(board[y][x].getColor(), x, y);
+                b.setMoved(true);
+                board[y][x] = b;
+                if (b.isValid(blackKing.getX(), blackKing.getY(), this, true))
+                    check = true;
+            }
+        }
+        else
+        {
+            if (userChoice.equals("queen")) {
+                Queen q = new Queen(board[y][x].getColor(), x, y);
+                q.setMoved(true);
+                board[y][x] = q;
+                if (q.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
+                    check = true;
+            }
+            else if (userChoice.equals("rook")) {
+                Rook r = new Rook(board[y][x].getColor(), x, y);
+                r.setMoved(true);
+                board[y][x] = r;
+                if (r.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
+                    check = true;
+            }
+            else if (userChoice.equals("knight")) {
+                Knight kn = new Knight(board[y][x].getColor(), x, y);
+                kn.setMoved(true);
+                board[y][x] = kn;
+                if (kn.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
+                    check = true;
+            }
+            else if (userChoice.equals("bishop")) {
+                Bishop b = new Bishop(board[y][x].getColor(), x, y);
+                b.setMoved(true);
+                board[y][x] = b;
+                if (b.isValid(whiteKing.getX(), whiteKing.getY(), this, true))
+                    check = true;
+            }
+        }
+        if(check)
+        {
+            checkmate = true;
+            for(int i = 0; i < 8; i++)
+            {
+                if(checkmate)
+                {
+                    for(int j = 0; j < 8; j++)
+                    {
+                        if(board[i][j] != null && board[i][j].getColor() != piece.getColor())
+                        {
+                            if(board[i][j] instanceof Pawn)
+                            {
+                                Pawn pawn = (Pawn) board[i][j];
+                                if(pawn.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                            if(board[i][j] instanceof Rook)
+                            {
+                                Rook rook = (Rook) board[i][j];
+                                if(rook.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                            if(board[i][j] instanceof Knight)
+                            {
+                                Knight knight = (Knight) board[i][j];
+                                if(knight.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                            if(board[i][j] instanceof Bishop)
+                            {
+                                Bishop bishop = (Bishop) board[i][j];
+                                if(bishop.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                            if(board[i][j] instanceof Queen)
+                            {
+                                Queen queen = (Queen) board[i][j];
+                                if(queen.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                            if(board[i][j] instanceof King)
+                            {
+                                King king = (King) board[i][j];
+                                if(king.hasValid(this))
+                                {
+                                    checkmate = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                    break;
+            }
+        }
     }
 }
