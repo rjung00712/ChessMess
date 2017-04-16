@@ -24,11 +24,16 @@ public class GridAdapter extends BaseAdapter {
     int[] pieces;
     View view;
     LayoutInflater layoutInflater;
+<<<<<<< HEAD
     boolean containsDragable;
     ChessActivity chessActivity;
 
     int position;
 
+=======
+    ChessActivity chessActivity;
+
+>>>>>>> 0a2726d1010e4cf5a00686bfa84c1af53cdc0890
     public GridAdapter(Context context, int[] images, int[] pieces, ChessActivity chessActivity) {
         this.context = context;
         this.images = images;
@@ -53,6 +58,7 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+<<<<<<< HEAD
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             view = new View(context);
@@ -96,6 +102,8 @@ public class GridAdapter extends BaseAdapter {
 
 //    @Override
 //    public View getView(int position, View convertView, ViewGroup parent) {
+=======
+>>>>>>> 0a2726d1010e4cf5a00686bfa84c1af53cdc0890
 //        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //        if(convertView == null) {
 //            view = new View(context);
@@ -158,11 +166,36 @@ public class GridAdapter extends BaseAdapter {
         FrameLayout frameLayout;
         ImageView imageView;
 
+<<<<<<< HEAD
         @Override
         public boolean onDrag(View v, DragEvent event) {
             int action = event.getAction();
 
             View dragView = (View) event.getLocalState();
+=======
+        final ImageView squareImage = new ImageView(context);
+        squareImage.setLayoutParams(new GridView.LayoutParams(squareWidth, squareWidth));
+        squareImage.setBackgroundResource(images[position]);
+        if(pieces[position] != -1)
+            squareImage.setImageResource(pieces[position]);
+        squareImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (chessActivity.isHasOne()) {
+                        chessActivity.setPosition2(position);
+                        chessActivity.move();
+                        chessActivity.setHasOne(false);
+                    } else {
+                        chessActivity.setPosition1(position);
+                        chessActivity.setHasOne(true);
+                        squareImage.setBackgroundResource(R.drawable.red_square);
+                    }
+                }
+                return true;
+            }
+        });
+>>>>>>> 0a2726d1010e4cf5a00686bfa84c1af53cdc0890
 
 
             switch (event.getAction()) {

@@ -10,8 +10,11 @@ public class Board
     private King whiteKing;
     private King blackKing;
     private char turn;
+<<<<<<< HEAD
+=======
     private boolean check;
     private boolean checkmate;
+>>>>>>> 0a2726d1010e4cf5a00686bfa84c1af53cdc0890
 
     public Board()
     {
@@ -48,8 +51,13 @@ public class Board
     public boolean makeMove(int startX, int startY, int endX, int endY)
     {
         boolean validMove = true;
+<<<<<<< HEAD
+        boolean check = false;
+        boolean checkmate = true;
+=======
         check = false;
         checkmate = true;
+>>>>>>> 0a2726d1010e4cf5a00686bfa84c1af53cdc0890
         Piece piece = board[startY][startX];
 
         if(piece == null || piece.getColor() != turn)
@@ -410,6 +418,8 @@ public class Board
     public char getTurn() {return turn;}
 
     public void setTurn(char t) {turn = t;}
+<<<<<<< HEAD
+=======
 
     public boolean getCheckmate() {return checkmate;}
 
@@ -603,4 +613,5 @@ public class Board
             }
         }
     }
+>>>>>>> 0a2726d1010e4cf5a00686bfa84c1af53cdc0890
 }

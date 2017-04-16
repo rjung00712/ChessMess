@@ -6,11 +6,11 @@ package techiiesio.com.chessmess;
 
 public class Pawn extends Piece
 {
-    private int enPassant;
-
     public Pawn(char c, int x, int y)
     {
         super(c, x, y);
+        type = 'P';
+        enPassant = 0;
     }
 
     public boolean isValid(int x, int y, Board b, boolean attacking)
@@ -25,7 +25,7 @@ public class Pawn extends Piece
         if(this.Color == 'W')
         {
             //Checks one spots up
-            if(board[yCoord - 1][xCoord] == null)
+            if(board[yCoord - 1][xCoord] == null && !attacking)
             {
                 valid[yCoord - 1][xCoord] = true;
                 //Checks two spots up
@@ -34,11 +34,11 @@ public class Pawn extends Piece
             }
             //Checks spot left and up one
             if(xCoord - 1 >= 0 && board[yCoord - 1][xCoord - 1] != null
-                    && board[yCoord - 1][xCoord - 1].getColor() != this.Color)
+                    && (board[yCoord - 1][xCoord - 1].getColor() != this.Color || attacking))
                 valid[yCoord - 1][xCoord - 1] = true;
             //Checks spot right and up one
             if(xCoord + 1 <= 7 && board[yCoord - 1][xCoord + 1] != null
-                    && board[yCoord - 1][xCoord + 1].getColor() != this.Color)
+                    && (board[yCoord - 1][xCoord + 1].getColor() != this.Color || attacking))
                 valid[yCoord - 1][xCoord + 1] = true;
             if(xCoord - 1 >= 0 && board[yCoord][xCoord - 1] != null
                     && board[yCoord][xCoord - 1] instanceof Pawn
@@ -60,7 +60,7 @@ public class Pawn extends Piece
         else
         {
             //Checks one spots down
-            if(board[yCoord + 1][xCoord] == null)
+            if(board[yCoord + 1][xCoord] == null && !attacking)
             {
                 valid[yCoord + 1][xCoord] = true;
                 //Checks two spots down
@@ -69,11 +69,11 @@ public class Pawn extends Piece
             }
             //Checks spot left and down one
             if(xCoord - 1 >= 0 && board[yCoord + 1][xCoord - 1] != null
-                    && board[yCoord + 1][xCoord - 1].getColor() != this.Color)
+                    && (board[yCoord + 1][xCoord - 1].getColor() != this.Color || attacking))
                 valid[yCoord + 1][xCoord - 1] = true;
             //Checks spot right and down one
             if(xCoord + 1 <= 7 && board[yCoord + 1][xCoord + 1] != null
-                    && board[yCoord + 1][xCoord + 1].getColor() != this.Color)
+                    && (board[yCoord + 1][xCoord + 1].getColor() != this.Color || attacking))
                 valid[yCoord + 1][xCoord + 1] = true;
             if(xCoord - 1 >= 0 && board[yCoord][xCoord - 1] != null
                     && board[yCoord][xCoord - 1] instanceof Pawn
@@ -190,8 +190,4 @@ public class Pawn extends Piece
             }
         return false;
     }
-
-    public int getEnPassant() {return enPassant;}
-
-    public void setEnPassant(int e) {enPassant = e;}
 }

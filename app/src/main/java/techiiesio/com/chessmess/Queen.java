@@ -9,6 +9,7 @@ public class Queen extends Piece
     public Queen(char c, int x, int y)
     {
         super(c, x, y);
+        type = 'Q';
     }
 
     public boolean isValid(int x, int y, Board b, boolean attacking)
@@ -29,7 +30,7 @@ public class Queen extends Piece
             tempY--;
         }
         if(tempX >= 0 && tempY >= 0)
-            if(board[tempY][tempX].getColor() != this.Color)
+            if(board[tempY][tempX].getColor() != this.Color || attacking)
                 valid[tempY][tempX] = true;
 
         //Checks all valid spots in the up and right diagonal
@@ -42,7 +43,7 @@ public class Queen extends Piece
             tempY--;
         }
         if(tempX <= 7 && tempY >= 0)
-            if(board[tempY][tempX].getColor() != this.Color)
+            if(board[tempY][tempX].getColor() != this.Color || attacking)
                 valid[tempY][tempX] = true;
 
         //Checks all valid spots in the down and left diagonal
@@ -55,7 +56,7 @@ public class Queen extends Piece
             tempY++;
         }
         if(tempX >= 0 && tempY <= 7)
-            if(board[tempY][tempX].getColor() != this.Color)
+            if(board[tempY][tempX].getColor() != this.Color || attacking)
                 valid[tempY][tempX] = true;
 
         //Checks all valid spots in the down and right diagonal
@@ -68,7 +69,7 @@ public class Queen extends Piece
             tempY++;
         }
         if(tempX <= 7 && tempY <= 7)
-            if(board[tempY][tempX].getColor() != this.Color)
+            if(board[tempY][tempX].getColor() != this.Color || attacking)
                 valid[tempY][tempX] = true;
 
         //Checks all valid spots to the left
@@ -79,7 +80,7 @@ public class Queen extends Piece
             tempX--;
         }
         if(tempX >= 0)
-            if(board[yCoord][tempX].getColor() != this.Color)
+            if(board[yCoord][tempX].getColor() != this.Color || attacking)
                 valid[yCoord][tempX] = true;
 
         //Checks all valid spots to the right
@@ -90,7 +91,7 @@ public class Queen extends Piece
             tempX++;
         }
         if(tempX <= 7)
-            if(board[yCoord][tempX].getColor() != this.Color)
+            if(board[yCoord][tempX].getColor() != this.Color || attacking)
                 valid[yCoord][tempX] = true;
 
         //Checks all valid spots above
@@ -101,7 +102,7 @@ public class Queen extends Piece
             tempY--;
         }
         if(tempY >= 0)
-            if(board[tempY][xCoord].getColor() != this.Color)
+            if(board[tempY][xCoord].getColor() != this.Color || attacking)
                 valid[tempY][xCoord] = true;
 
         //Checks all valid spots below
@@ -112,7 +113,7 @@ public class Queen extends Piece
             tempY++;
         }
         if(tempY <= 7)
-            if(board[tempY][xCoord].getColor() != this.Color)
+            if(board[tempY][xCoord].getColor() != this.Color || attacking)
                 valid[tempY][xCoord] = true;
 
         if(valid[y][x] && !attacking)

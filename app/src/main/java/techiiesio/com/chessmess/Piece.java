@@ -10,6 +10,8 @@ public class Piece
     protected int xCoord;	//X coordinate of the piece
     protected int yCoord;	//Y coordinate of the piece
     protected boolean moved;	//Says whether or not the piece has been moved
+    protected char type;    //Holds the type of the piece
+    protected int enPassant;
 
     public Piece(char c, int x, int y)
     {
@@ -36,6 +38,10 @@ public class Piece
     public int getY() {return yCoord;}
 
     public boolean hasMoved() {return moved;}
+
+    public char getType() {return type;}
+
+    public void setType(char t) {type = t;}
 
     //Returns false if the move does not cause your king to be in check
     public boolean causesCheck(int x, int y, Board b)
@@ -83,4 +89,8 @@ public class Piece
         yCoord = tempY;
         return false;
     }
+
+    public int getEnPassant() {return enPassant;}
+
+    public void setEnPassant(int e) {enPassant = e;}
 }

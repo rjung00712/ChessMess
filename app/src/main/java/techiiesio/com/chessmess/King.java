@@ -9,6 +9,7 @@ public class King extends Piece
     public King(char c, int x, int y)
     {
         super(c, x, y);
+        type = 'K';
     }
 
     public boolean isValid(int x, int y, Board b)
